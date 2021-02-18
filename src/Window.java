@@ -10,13 +10,16 @@ public class Window extends JFrame {
         setBounds(100, 100, WIDTH, HEIGHT);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setLayout(null);
         addVidgets();
+        pack();
     }
 
     private void addVidgets(){
         JLabel label = new JLabel("Моя первая надпись!");
         label.setFont(new Font("Times New Roman", Font.BOLD, 50));
-        label.setBounds(50, 50, 100, 100);
+        label.setBounds(50, 50, WIDTH-50, 100);
         getContentPane().add(label);
     }
 }
