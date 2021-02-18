@@ -5,7 +5,7 @@ public class Window extends JFrame {
 
     public final int WIDTH = 1280;
     public final int HEIGHT = 720;
-    private int button_c;
+    private boolean is_custom_ans;
 
     Window(){
         setBounds(100, 100, WIDTH, HEIGHT);
@@ -15,20 +15,42 @@ public class Window extends JFrame {
         setLayout(null);
         addVidgets();
         pack();
-        button_c = 0;
     }
 
     private void addVidgets(){
-        JLabel label = new JLabel("Button pressed 0 times");
+        //Вывод ответа
+        JLabel label = new JLabel("Ваш ответ: ");
         label.setFont(new Font("Times New Roman", Font.BOLD, 50));
         label.setBounds(50, 50, WIDTH-50, 100);
         getContentPane().add(label);
-        JButton button = new JButton();
-        button.setBounds(50, 250, 50, 50);
-        button.addActionListener(i->{
-            button_c++;
-            label.setText(String.format("Button pressed %d times", button_c));
-        });
+
+        //Выпадающий список
+        String[] colors = {"красный", "оранжевый", "желтый", "зеленый", "голубой", "синий", "фиолетовый"};
+        JComboBox<String> box = new JComboBox<>(colors);
+        box.setBounds(50, 150, 250, 25);
+        getContentPane().add(box);
+
+        //Выбор своего варианта
+        JCheckBox checkBox = new JCheckBox("Свой вариант");
+        checkBox.setBounds(100, 200, 250, 50);
+        getContentPane().add(checkBox);
+
+        //Текстовое поле
+        JTextField textField = new JTextField();
+        textField.setBounds(50, 250, 250, 25);
+        getContentPane().add(textField);
+
+        //Кнопка добавления
+        JButton button = new JButton("Ответить");
+        int button_width = 200;
+        button.setBounds((box.getWidth()-200)/2+50, 350, button_width, 50);
         getContentPane().add(button);
+        button.addActionListener(i->{
+            if(!checkBox.isSelected()) {
+                label.setText(String.format("Ваш ответ: %s", box.getModel().getSelectedItem()));
+            }else{
+                label.setText(String.format("Ваш ответ: %s", textField.getText()));
+            }
+        });
     }
 }
