@@ -21,5 +21,9 @@ public class Window extends JFrame {
         label.setFont(new Font("Times New Roman", Font.BOLD, 50));
         label.setBounds(50, 50, WIDTH-50, 100);
         getContentPane().add(label);
+        JSlider slider = new JSlider(5, 100);
+        slider.setBounds(50, 200, 100, 25);
+        slider.addChangeListener(i-> label.setFont(label.getFont().deriveFont(Font.BOLD, slider.getValue())));
+        getContentPane().add(slider);
     }
 }
